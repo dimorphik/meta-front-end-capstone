@@ -1,4 +1,5 @@
-# Meta Front End Developer Certificate: Capstone Project
+# Meta Front End Developer Certificate
+## Capstone Project
 
 This project is the focus of the penultimate course in Meta's front end developer certificate program; it should be fun.
 
