@@ -1,9 +1,9 @@
 const Footer = () => {
   return (
     <footer>
-      <img src="/assets/images/Asset 20@4x.png" alt="Little Lemon Logo" width="50" />
-      <div>
-        <p>Doormat Navigation</p>
+      <img className="footer-logo" src="/assets/images/Asset 20@4x.png" alt="Little Lemon Logo" />
+      <section>
+        <p className="footer-section-title">Doormat Navigation</p>
         <ul>
           <li>
             <a href="#">Home</a>
@@ -24,9 +24,9 @@ const Footer = () => {
             <a href="#">Login</a>
           </li>
         </ul>
-      </div>
-      <div>
-        <p>Contact</p>
+      </section>
+      <section>
+        <p className="footer-section-title">Contact</p>
         <ul>
           <li>
             <a href="#">Address</a>
@@ -38,21 +38,21 @@ const Footer = () => {
             <a href="#">Email</a>
           </li>
         </ul>
-      </div>
-      <div>
-        <p>Social Media Links</p>
+      </section>
+      <section>
+        <p className="footer-section-title">Social Media Links</p>
         <ul>
           <li>
-            <a href="#">Twitter</a>
+            <a href="#">Tweeter</a>
           </li>
           <li>
-            <a href="#">Facebook</a>
+            <a href="#">Faceboop</a>
           </li>
           <li>
-            <a href="#">Instagram</a>
+            <a href="#">Instablam</a>
           </li>
         </ul>
-      </div>
+      </section>
     </footer>
   );
 };
