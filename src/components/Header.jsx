@@ -1,8 +1,8 @@
 const Header = () => {
   return (
     <header>
-      <nav>
-        <img src="/assets/images/Logo.svg" alt="Little Lemon Logo"></img>
+      <nav class="header-nav">
+        <img className="header-logo" src="/assets/images/Logo.svg" alt="Little Lemon Logo"></img>
         <ul>
           <li>
             <a href="#">Home</a>
