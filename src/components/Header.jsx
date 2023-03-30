@@ -1,7 +1,7 @@
 const Header = () => {
   return (
-    <header>
-      <nav class="header-nav">
+    <header className="grid">
+      <nav className="grid-content flex-spaced">
         <img className="header-logo" src="/assets/images/Logo.svg" alt="Little Lemon Logo"></img>
         <ul>
           <li>
