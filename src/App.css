@@ -292,8 +292,7 @@ header li:last-child {
 
 #testimonials li {
   width: 100%;
-  margin-right: 10px;
-  padding: 10px;
+  margin-right: 30px;
   font-family: Karla;
 }
 
@@ -302,8 +301,9 @@ header li:last-child {
 }
 
 #testimonials .rating {
-  font-weight: bold;
-  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  margin: 0 0 10px 0;
 }
 
 #testimonials .reviewer-details {
@@ -312,7 +312,7 @@ header li:last-child {
   margin-bottom: 10px;
 }
 
-#testimonials img {
+#testimonials .reviewer-details img {
   border-radius: 50%;
   border: 3px solid #f4ce14;
 }
@@ -331,7 +331,7 @@ header li:last-child {
     text-align: center;
   }
 
-  #testimonials img {
+  #testimonials .reviewer-details img {
     display: block;
   }
 
@@ -344,6 +344,11 @@ header li:last-child {
 
   #testimonials .review-content {
     font-size: 0.6rem;
+  }
+
+  #testimonials .rating img {
+    width: 10px;
+    margin-left: 1px;
   }
 }
 
@@ -359,6 +364,11 @@ header li:last-child {
 
   #testimonials .review-content {
     font-size: 0.8rem;
+  }
+
+  #testimonials .rating img {
+    width: 15px;
+    margin-left: 2px;
   }
 }
 
