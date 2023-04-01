@@ -1,17 +1,20 @@
 import { render, screen } from "@testing-library/react";
-import Main from "./Main";
+import Main, { createDateFromString } from "./Main";
+import { fetchAPI } from "../api";
 import { initializeTimes, updateTimes } from "./Main";
 
 test("initializeTimes returns the proper value", () => {
-  const expected = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
-  const result = initializeTimes();
-  expect(result).toEqual(expected);
+  const date = new Date();
+  const expectedTimes = fetchAPI(date);
+  const availableTimes = initializeTimes();
+  expect(availableTimes).toEqual(expectedTimes);
 });
 
 test("updateTimes returns the proper value", () => {
-  const randomArrayLength = Math.floor(Math.random() * 10);
-  const state = Array.from(Array(randomArrayLength));
-  const action = Math.floor(Math.random() * 1);
-  const result = updateTimes(state, action);
-  expect(result).toEqual(state);
+  const dateString = "2023-04-01";
+  const date = createDateFromString(dateString);
+  const expectedTimes = fetchAPI(date);
+  const action = { value: dateString };
+  const result = updateTimes({}, action);
+  expect(result).toEqual(expectedTimes);
 });

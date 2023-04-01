@@ -13,6 +13,13 @@ const BookingForm = (props) => {
           props.dispatchAvailableTimes({ type: "", value: e.target.value });
         }}
       />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        {props.availableTimes.map((time) => (
+          <div key={time} style={{ padding: "10px" }}>
+            {time}
+          </div>
+        ))}
+      </div>
       <label htmlFor="res-time">Choose time</label>
       <select
         id="res-time"
