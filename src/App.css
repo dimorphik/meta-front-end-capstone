@@ -24,6 +24,12 @@ button {
   color: #495e57;
   border-radius: 16px;
   border: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ddd;
+  color: #666;
 }
 
 @media (max-width: 923px) {
@@ -466,4 +472,122 @@ footer ul {
   .footer-section-title {
     font-size: 1.3rem;
   }
+}
+
+#booking {
+  display: flex;
+  justify-content: center;
+  font-family: Karla;
+}
+
+#booking h2 {
+  text-align: center;
+}
+#booking form {
+  display: grid;
+  min-width: 170px;
+  width: 50%;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+#booking label {
+  font-weight: bold;
+  text-align: center;
+}
+
+#booking input,
+#booking select {
+  margin: 0 auto 10px auto;
+}
+
+#booking #date {
+  font-size: 16px;
+  width: 130px;
+}
+
+#booking #guests {
+  font-size: 16px;
+  width: 130px;
+}
+
+#booking #occasion {
+  font-size: 16px;
+  width: 130px;
+}
+
+#booking #submit {
+  margin: 0 auto;
+}
+
+.time-list {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.time-list button {
+  box-sizing: margin-box;
+  font-family: Karla;
+  font-weight: bold;
+  background-color: #f4ce14;
+  border: 1px solid #f4ce14;
+  color: #495e57;
+  border-radius: 16px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  padding: 4px 9px;
+}
+
+.time-list button:last-child {
+  margin-right: 0;
+}
+
+.time-list button:hover {
+  border: 1px solid #495e57;
+}
+
+.time-list button.selected {
+  background-color: #495e57;
+  border-color: #495e57;
+  color: #fff;
+}
+
+.validation-error {
+  color: rgb(141, 37, 37);
+  text-align: center;
+}
+
+@media (max-width: 923px) {
+  #booking #submit {
+    width: 170px;
+  }
+}
+
+@media (min-width: 924px) {
+  #booking #submit {
+    width: 250px;
+  }
+}
+
+#booking-confirmed {
+  font-family: Karla;
+  width: 300px;
+  margin: 20px auto;
+}
+
+#booking-confirmed h2 {
+  margin-bottom: 10px;
+}
+
+#booking-confirmed article span {
+  font-weight: bold;
+}
+
+#booking-confirmed h3 {
+  margin-top: 25px;
 }

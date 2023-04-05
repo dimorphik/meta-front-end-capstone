@@ -30,7 +30,9 @@ const Specials = () => {
       <article className="grid-content">
         <div className="heading">
           <h2>Specials</h2>
-          <button className="btn-primary">Online Menu</button>
+          <button aria-label="On Click" className="btn-primary">
+            Online Menu
+          </button>
         </div>
         <section className="specials">
           {dishes.map((dish) => (

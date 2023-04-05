@@ -1,56 +1,84 @@
+const isFormValid = (props) => {
+  const isValid =
+    !!props.todaysDate &&
+    !!props.date &&
+    !!props.time &&
+    !!props.availableTimes.length &&
+    !!props.guests;
+  return isValid;
+};
+
 const BookingForm = (props) => {
   return (
-    <form
-      onSubmit={props.onSubmit}
-      style={{ display: "grid", maxWidth: "200px", gap: "20px", margin: "100px" }}>
-      <label htmlFor="res-date">Choose date</label>
+    <form onSubmit={props.onSubmit}>
+      <h2>When would you like to dine with us?</h2>
+      <label htmlFor="date">Choose date</label>
       <input
+        required
+        id="date"
         type="date"
-        id="res-date"
+        min={props.todaysDate}
         value={props.date}
         onChange={(e) => {
           props.setDate(e.target.value);
           props.dispatchAvailableTimes({ type: "", value: e.target.value });
         }}
       />
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        {props.availableTimes.map((time) => (
-          <div key={time} style={{ padding: "10px" }}>
-            {time}
+      {props.availableTimes.length ? (
+        <>
+          <label htmlFor="time">Time</label>
+          <div id="time" className="time-list">
+            {props.availableTimes.map((timeListItemValue) => (
+              <button
+                key={timeListItemValue}
+                type="button"
+                aria-label="On Click"
+                className={props.time === timeListItemValue ? "selected" : ""}
+                onClick={(e) => {
+                  const newTime = e.target.innerText;
+                  props.setTime(newTime);
+                }}>
+                {timeListItemValue}
+              </button>
+            ))}
           </div>
-        ))}
-      </div>
-      <label htmlFor="res-time">Choose time</label>
-      <select
-        id="res-time"
-        defaultValue={props.time}
-        onChange={(e) => props.setTime(e.target.value)}>
-        {props.availableTimes.map((time) => (
-          <option key={time}>{time}</option>
-        ))}
-      </select>
+        </>
+      ) : (
+        <div className="validation-error">
+          We're sorry, but there are no reservation times available for this date. We hope you'll
+          select another day to join us!
+        </div>
+      )}
       <label htmlFor="guests">Number of guests</label>
       <input
+        required
+        id="guests"
         type="number"
         placeholder="1"
         min="1"
         max="10"
-        id="guests"
         value={props.guests}
-        onChange={(e) => props.setGuests(e.target.value)}
+        onChange={(e) => {
+          props.setGuests(e.target.value);
+        }}
       />
       <label htmlFor="occasion">Occasion</label>
       <select
         id="occasion"
         defaultValue={props.occasion}
-        onChange={(e) => props.setOccasion(e.target.value)}>
+        onChange={(e) => {
+          props.setOccasion(e.target.value);
+        }}>
         {props.occasions.map((occasion) => (
           <option key={occasion}>{occasion}</option>
         ))}
       </select>
-      <input type="submit" value="Make Your reservation" />
+      <button aria-label="On Click" id="submit" disabled={!isFormValid(props)}>
+        Make Your reservation
+      </button>
     </form>
   );
 };
 
 export default BookingForm;
+export { isFormValid };

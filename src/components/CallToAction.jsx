@@ -7,7 +7,9 @@ const CallToAction = () => {
         <div className="article-content">
           <Chicago />
           <div className="button-container">
-            <button className="btn-primary">Reserve a Table</button>
+            <button aria-label="On Click" className="btn-primary">
+              Reserve a Table
+            </button>
           </div>
         </div>
         <div className="image-container">

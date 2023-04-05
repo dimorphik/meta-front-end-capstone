@@ -3,10 +3,14 @@ import { useState, useReducer } from "react";
 import { fetchAPI, submitAPI } from "../api";
 
 import Homepage from "./Homepage";
-import Bookings from "./Bookings";
+import Booking from "./Booking";
 import ConfirmedBooking from "./ConfirmedBooking";
 
 const getTimesForDate = (date) => {
+  const dateString = stringifyDate(date);
+  if (dateString === "2023-04-10") {
+    return [];
+  }
   const times = fetchAPI(date);
 
   return times;
@@ -14,7 +18,7 @@ const getTimesForDate = (date) => {
 
 const createDateFromString = (dateString) => {
   const dateComponents = dateString.split("-");
-  const date = new Date(dateComponents[2], dateComponents[1] - 1, dateComponents[0]);
+  const date = new Date(dateComponents[0], dateComponents[1] - 1, dateComponents[2]);
 
   return date;
 };
@@ -33,12 +37,18 @@ const updateTimes = (state, action) => {
   return times;
 };
 
-const getTodaysDate = () => {
-  const date = new Date();
+const stringifyDate = (date) => {
   const year = date.getFullYear();
   const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const day = date.getDate().toString().padStart(2, "0");
-  const todaysDate = `${year}-${month}-${day}`;
+  const stringifiedDate = `${year}-${month}-${day}`;
+
+  return stringifiedDate;
+};
+
+const getTodaysDate = () => {
+  const date = new Date();
+  const todaysDate = stringifyDate(date);
 
   return todaysDate;
 };
@@ -47,21 +57,38 @@ const occasions = ["None", "Birthday", "Anniversary"];
 
 const Main = () => {
   const navigate = useNavigate();
+  const todaysDate = getTodaysDate();
+  const [availableTimes, dispatchAvailableTimes] = useReducer(updateTimes, initializeTimes());
+  const [date, setDate] = useState(todaysDate);
+  const [time, setTime] = useState(availableTimes.length ? availableTimes[0] : "");
+  const [guests, setGuests] = useState(2);
+  const [occasion, setOccasion] = useState("None");
+  const [reservationData, setReservationData] = useState({});
+
+  const initializFormData = () => {
+    setDate(todaysDate);
+    dispatchAvailableTimes({ type: "", value: todaysDate });
+    setTime(availableTimes.length ? availableTimes[0] : "");
+    setGuests(2);
+    setOccasion(occasions[0]);
+  };
 
   const onFormSubmitted = (e) => {
     e.preventDefault();
+
     const success = submitAPI({});
 
     if (success) {
+      setReservationData({
+        date,
+        time,
+        guests,
+        occasion,
+      });
+      initializFormData();
       navigate("/confirmed-reservation");
     }
   };
-
-  const [availableTimes, dispatchAvailableTimes] = useReducer(updateTimes, initializeTimes());
-  const [date, setDate] = useState(getTodaysDate());
-  const [time, setTime] = useState(availableTimes[0]);
-  const [guests, setGuests] = useState(2);
-  const [occasion, setOccasion] = useState("None");
 
   return (
     <main>
@@ -72,7 +99,8 @@ const Main = () => {
         <Route
           path="/reservations"
           element={
-            <Bookings
+            <Booking
+              todaysDate={todaysDate}
               date={date}
               setDate={setDate}
               time={time}
@@ -89,9 +117,7 @@ const Main = () => {
           }></Route>
         <Route
           path="/confirmed-reservation"
-          element={
-            <ConfirmedBooking date={date} time={time} guests={guests} occasion={occasion} />
-          }></Route>
+          element={<ConfirmedBooking reservationData={reservationData} />}></Route>
         <Route path="/order-online" element={<Homepage />}></Route>
         <Route path="/login" element={<Homepage />}></Route>
       </Routes>
