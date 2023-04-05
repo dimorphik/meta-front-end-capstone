@@ -1,13 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import Chicago from "./Chicago";
 
 const CallToAction = () => {
+  const navigate = useNavigate();
+
   return (
     <section id="hero" className="grid">
       <article className="grid-content flex-spaced">
         <div className="article-content">
           <Chicago />
           <div className="button-container">
-            <button aria-label="On Click" className="btn-primary">
+            <button
+              aria-label="On Click"
+              className="btn-primary"
+              onClick={(e) => navigate("/reservations")}>
               Reserve a Table
             </button>
           </div>
